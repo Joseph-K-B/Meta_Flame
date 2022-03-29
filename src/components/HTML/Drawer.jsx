@@ -2,30 +2,40 @@ import { useState } from "react";
 import { animated as a, useSpring } from "react-spring";
 
 import css from '../../app.css';
+import { useStore } from "../../hooks/useStand";
 
 function Drawer(){
+  const page = useStore((state) => state.page);
+  const home = useStore((state) => state.home);
+  const animationOne = useStore((state) => state.animationOne);
+
+  const setPage = useStore((state) => state.setPage);
+  const setHome = useStore((state) => state.setHome);
+  const setAnimationOne = useStore((state) => state.setAnimationOne);
 
   const [lActive, setLActive] = useState(false);
-  const [rActive, setRActive] = useState(false);
   
   const props = useSpring({
     right: lActive ? window.innerWidth - 200 : window.innerWidth - 0.001,
     top: window.innerHeight / 10
-  })
-  
-  const rProps = useSpring({
-    left: rActive ? window.innerWidth - 200 : window.innerWidth - 0.001,
-    top: window.innerHeight / 10
-  })
+  });
   
   const handleToggleLeft = () => {
     setLActive(v => !v);
-    console.log(lActive, 'left drawer')
+  }
+
+  const handlePage = () => {
+    setPage(page + 1);
+    console.log(page);
   }
   
-  const handleToggleRight = () => {
-    setRActive(v => !v);
-    console.log(rActive, 'right drawer')
+  const handleAnimOne = () => {
+    setAnimationOne(!animationOne)
+    setHome(false);
+  }
+
+  const handleHome = () => {
+    setHome(!home);
   }
 
   return (
@@ -40,22 +50,23 @@ function Drawer(){
           </button>
         </div>
         <div className={css.panel}>
-          <button>
+          <button onClick={handleHome}>
             1
           </button>
-          <button>
+          {/* <button onClick={handleAnimOne}> */}
+          <button onClick={handlePage}>
             2
           </button>
-          <button>
+          <button onClick={handlePage}>
             3
           </button>
-          <button>
+          <button onClick={() => handlePage(3)}>
             4
           </button>
-          <button>
+          <button onClick={() => handlePage(4)}>
             5
           </button>
-          <button>
+          <button onClick={() => handlePage(5)}>
             6
           </button>
         </div>

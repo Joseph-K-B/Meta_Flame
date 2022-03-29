@@ -15,7 +15,7 @@ function Scene() {
     <>
       <OrbitControls makeDefault/>
       <META />
-      <Desk position = {[0, -viewport.height * 2, 0]}/>
+      <Desk />
     </>
   );
 };
