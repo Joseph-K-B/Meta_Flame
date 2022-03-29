@@ -5,6 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 
 import Desk from "../Models/Desk";
 import META from "../Models/META";
+import Grass from '../Terrain/Grass';
 
 
 function Scene() {
@@ -13,9 +14,11 @@ function Scene() {
 
   return(
     <>
+      <ambientLight intensity={0.05} />
       <OrbitControls makeDefault/>
-      <META />
-      <Desk />
+      <Grass />
+      {/* <META /> */}
+      {/* <Desk /> */}
     </>
   );
 };
