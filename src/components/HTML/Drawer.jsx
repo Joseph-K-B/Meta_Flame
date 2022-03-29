@@ -6,12 +6,11 @@ import { useStore } from "../../hooks/useStand";
 
 function Drawer(){
   const page = useStore((state) => state.page);
-  const home = useStore((state) => state.home);
-  const animationOne = useStore((state) => state.animationOne);
 
+
+  
   const setPage = useStore((state) => state.setPage);
-  const setHome = useStore((state) => state.setHome);
-  const setAnimationOne = useStore((state) => state.setAnimationOne);
+  const setForward = useStore((state) => state.setForward);
 
   const [lActive, setLActive] = useState(false);
   
@@ -26,21 +25,13 @@ function Drawer(){
 
   const handlePage = () => {
     setPage(page + 1);
-    console.log(page);
+    setForward(true);
   }
-
+  
   const handlePrevPage = () => {
     setPage(page - 1);
     console.log(page);
-  }
-  
-  const handleAnimOne = () => {
-    setAnimationOne(!animationOne)
-    setHome(false);
-  }
-
-  const handleHome = () => {
-    setHome(!home);
+    setForward(false);
   }
 
   return (

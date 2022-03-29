@@ -6,7 +6,7 @@ import React, { useRef } from 'react'
 import * as THREE from 'three';
 
 
-import { useGLTF } from '@react-three/drei'
+import { Float, useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber';
 
 
@@ -14,29 +14,39 @@ import { useStore } from '../../../hooks/useStand';
 
 export default function META({ ...props }) {
   const page = useStore((state) => state.page);
-  const animationOne = useStore((state) => state.animationOne);
-  const home = useStore((state) => state.home);
+  const forward = useStore((state) => state.forward);
 
   const group = useRef()
 
   const {viewport}= useThree();
   const { nodes, materials } = useGLTF('/META.glb');
 
+  //prev positions
+
+
   const vec = new THREE.Vector3();
+  const prev = new THREE.Vector3();
 
   useFrame(() => {
     const step = 0.05
-    if(page > 0 && page <= 1) {
-      vec.set(0, 10, -1)
-      group.current.position.lerp(vec, step)
+    const islandPosition = group.current.position
+    if(forward && page === 1) {
+      prev.set(0, -1.25, -1);
+      vec.set(0, 10, -1);
+      islandPosition.lerp(vec, step)
+    }
+    if(!forward && page === 4) {
+      vec.set(0, 10, -1);
+      islandPosition.lerp(vec, step);
+    }
+    if(page === 5) {
+      prev.set(0, 10, -1);
+      vec.set(0, -1.25, -0.5)
+      islandPosition.lerp(vec, step / 3)
     }
     if(page === 0) {
-      vec.set(0, -1.25, -1)
-      group.current.position.lerp(vec, step)
-    }
-    if(page > 4) {
-      vec.set(0, -1.25, -0.5)
-      group.current.position.lerp(vec, step / 3)
+      vec.set(0, -1.5, 0)
+      islandPosition.lerp(vec, step)
     }
   });
 
@@ -46,9 +56,9 @@ export default function META({ ...props }) {
       ref={group} 
       {...props} 
       dispose={null}
-      rotation={[Math.PI / 6, -Math.PI / 3, 0]}
+      rotation={[0, -Math.PI / 3, 0]}
       // scale={viewport.width / 6}
-      position={[0, -1.25, -1]}
+      position={[0, -1.5, 0]}
       // position={[0, -1.25, -1]}
       onClick={() => console.log(viewport)}
     >
@@ -92,32 +102,32 @@ export default function META({ ...props }) {
           <meshBasicMaterial color='orange' />
         </mesh>
       </group>
-      <mesh 
-        geometry={nodes.pyramid.geometry} 
-        // material={nodes.pyramid.material} 
-        position={[-0.08, 2.65, -0.07]} 
-        rotation={[2.58, -0.09, 3.09]} 
-        scale={[-0.03, -0.02, 0.12]} 
-      >
-        <meshBasicMaterial color='gray' />
-      </mesh>
-      <mesh 
-        geometry={nodes.small_sphere.geometry} 
-        // material={nodes.small_sphere.material} 
-        position={[-0.08, 2.65, -0.06]} 
-        rotation={[Math.PI, -0.1, Math.PI]} 
-        scale={0.07} 
-      >
-        <meshBasicMaterial color='gray' />
-      </mesh>
-      <mesh 
-        geometry={nodes.middle_sphere.geometry} 
-        // material={nodes.middle_sphere.material} 
-        position={[-0.09, 2.65, -0.07]} 
-        scale={-0.21} 
-      >
-        <meshBasicMaterial color='blue' wireframe/>
-      </mesh>
+        <mesh 
+          geometry={nodes.pyramid.geometry} 
+          // material={nodes.pyramid.material} 
+          position={[-0.08, 2.65, -0.07]} 
+          rotation={[2.58, -0.09, 3.09]} 
+          scale={[-0.03, -0.02, 0.12]} 
+        >
+          <meshBasicMaterial color='gray' />
+        </mesh>
+        <mesh 
+          geometry={nodes.small_sphere.geometry} 
+          // material={nodes.small_sphere.material} 
+          position={[-0.08, 2.65, -0.06]} 
+          rotation={[Math.PI, -0.1, Math.PI]} 
+          scale={0.07} 
+        >
+          <meshBasicMaterial color='gray' />
+        </mesh>
+        <mesh 
+          geometry={nodes.middle_sphere.geometry} 
+          // material={nodes.middle_sphere.material} 
+          position={[-0.09, 2.65, -0.07]} 
+          scale={-0.21} 
+        >
+          <meshBasicMaterial color='blue' wireframe/>
+        </mesh>
       {/* <mesh 
         geometry={nodes.electric_sphere.geometry} 
         material={nodes.electric_sphere.material} 

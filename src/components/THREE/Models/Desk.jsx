@@ -11,7 +11,7 @@ import { useStore } from '../../../hooks/useStand';
 
 export default function Desk({ ...props }) {
   const page = useStore((state) => state.page);
-  const home = useStore((state) => state.home);  
+  const forward = useStore((state) => state.forward);  
 
   const group = useRef();
 
@@ -33,11 +33,17 @@ export default function Desk({ ...props }) {
   */
 
   useFrame(() => {
-    // console.log(camera.position)
+    const deskPosition = group.current.position;
     const step = 0.05
+    if(page === 0) {
+      vec.set(0, 3.0616997, 5);
+      vecTwo.set(0, -17, 0);
+      camera.position.lerp(vec, step / 2);
+      deskPosition.lerp(vecTwo, step * 2)
+    }
     if(page === 1) {
       vec.set(0, -1.5, -1)
-      group.current.position.lerp(vec, step)
+      deskPosition.lerp(vec, step)
     }
     if(page === 2) {
       vec.set(5, 10, 5)
@@ -53,21 +59,20 @@ export default function Desk({ ...props }) {
     }
     if(page === 5) {
       vec.set(0, 3, -5);
-      vecTwo.set(0, -10, 0);
+      vecTwo.set(0, -15, 0);
       camera.position.lerp(vec, step);
-      group.current.position.lerp(vecTwo, step / 2)
+      deskPosition.lerp(vecTwo, step / 2)
     }
-    // if(page === 0) {
-    //   vec.set(0, 3.0616997, 5);
-    //   camera.position.lerp(vec, step / 2);
-    // }
+    if(!forward && page === 4) {
+      vec.set(0, -1.5, -1);
+      deskPosition.lerp(vec, step);
+    }
   });
 
   return (
     <group 
       ref={group}
-      scale={0.25} 
-      position={[0, -10, 0]}
+      scale={0.25}
       dispose={null}
     >
       <mesh
