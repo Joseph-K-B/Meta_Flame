@@ -7,15 +7,24 @@ import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber';
 
+
 export default function DeskTwo({ ...props }) {
-  const group = useRef()
+
+  const group = useRef();
   const { nodes, materials } = useGLTF('/desk_2.glb')
 
   const texture = useLoader(THREE.TextureLoader, '/Untitled.jpg');
   texture.flipY = false;
 
+
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group 
+      ref={group} 
+      {...props} 
+      dispose={null} 
+      scale={0.25}
+      rotation={[ 0, -.685, 0]}
+    >
       <mesh 
         geometry={nodes.keyboard.geometry} 
         material={nodes.keyboard.material} 
