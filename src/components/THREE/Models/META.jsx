@@ -14,6 +14,7 @@ export default function META({ ...props }) {
       {...props} 
       dispose={null}
       rotation={[0, Math.PI * 0.65, 0]}
+      scale={0.5}
     >
       <group position={[0.27, 0.42, -1.37]} scale={2.08}>
         <group rotation={[0.42, 0.05, 0.23]}>

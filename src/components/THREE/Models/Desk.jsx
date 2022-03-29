@@ -8,7 +8,7 @@ import { useGLTF } from '@react-three/drei';
 import { useLoader, useThree } from '@react-three/fiber';
 
 export default function Desk({ ...props }) {
-  const { viewport } = useThree();
+  
 
 
   const group = useRef();
@@ -26,7 +26,7 @@ export default function Desk({ ...props }) {
       scale={0.25} 
       {...props} 
       dispose={null}
-      position = {[0, -viewport.height * 4, 0]}
+
     >
       <mesh 
         geometry={nodes.Cube.geometry} 

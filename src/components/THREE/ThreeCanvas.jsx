@@ -11,7 +11,7 @@ function ThreeCanvas() {
   return(
     <>
       <Canvas className={css.Canvas}>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <Stats />
         <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
           <Scene />
