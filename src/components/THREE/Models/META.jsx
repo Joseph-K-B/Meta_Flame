@@ -19,7 +19,7 @@ export default function META({ ...props }) {
   const group = useRef()
 
   const {viewport}= useThree();
-  const { nodes, materials } = useGLTF('/META.glb');
+  const { nodes, materials } = useGLTF('/island/META.glb');
 
   //prev positions
 
@@ -201,4 +201,4 @@ export default function META({ ...props }) {
   )
 }
 
-useGLTF.preload('/META.glb')
+useGLTF.preload('/island/META.glb');
