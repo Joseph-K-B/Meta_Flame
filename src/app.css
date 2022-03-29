@@ -6,5 +6,70 @@
 .Canvas {
   min-height: 100vh;
   min-width: 100vw;
-  background-color: black;
+  background: linear-gradient(90.24deg, #1A0340 0.3%, rgba(4, 0, 10, 0.932) 80.16%);
+}
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  min-width: 100vw;
+  color: white;
+  z-index: 9;
+  background-color: rgb(90, 3, 90, 0.3);
+  min-height: 7rem;
+}
+
+.Header img {
+  padding: 0.5rem;
+  margin: 0.15rem;
+}
+
+.Header button {
+  background: none;
+  border: none;
+  color: white;
+}
+
+
+.Drawer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  position: absolute;
+  left: 0;
+  min-height: 85vh;
+  z-index: 9;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 2rem;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff00;
+  min-width: 1rem;
+  min-height: 6rem;
+  border: none;
+  border-radius: 40%;
+  color: white;
+}
+
+.prompt {
+  background-color: navy;
 }

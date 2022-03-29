@@ -10,9 +10,12 @@ function ThreeCanvas() {
 
   return(
     <>
-      <Canvas className={css.Canvas}>
-        {/* <OrbitControls /> */}
-        <Stats />
+      <Canvas 
+        className={css.Canvas}
+        // camera={{position: [0, 0, 0]}}
+      >
+        <OrbitControls />
+        {/* <Stats /> */}
         <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
           <Scene />
         </Suspense>
