@@ -28,6 +28,11 @@ function Drawer(){
     setPage(page + 1);
     console.log(page);
   }
+
+  const handlePrevPage = () => {
+    setPage(page - 1);
+    console.log(page);
+  }
   
   const handleAnimOne = () => {
     setAnimationOne(!animationOne)
@@ -50,25 +55,13 @@ function Drawer(){
           </button>
         </div>
         <div className={css.panel}>
-          <button onClick={handleHome}>
-            1
-          </button>
-          {/* <button onClick={handleAnimOne}> */}
           <button onClick={handlePage}>
-            2
+            +++
           </button>
-          <button onClick={handlePage}>
-            3
+          <button onClick={handlePrevPage}>
+            ---
           </button>
-          <button onClick={() => handlePage(3)}>
-            4
-          </button>
-          <button onClick={() => handlePage(4)}>
-            5
-          </button>
-          <button onClick={() => handlePage(5)}>
-            6
-          </button>
+
         </div>
       </a.section>
     </>

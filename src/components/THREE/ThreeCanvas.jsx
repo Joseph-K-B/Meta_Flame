@@ -12,7 +12,6 @@ function ThreeCanvas() {
     <>
       <Canvas 
         className={css.Canvas}
-        // camera={{position: [0, 0, 0]}}
       >
         <OrbitControls />
         {/* <Stats /> */}

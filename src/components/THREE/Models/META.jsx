@@ -30,10 +30,14 @@ export default function META({ ...props }) {
       vec.set(0, 10, -1)
       group.current.position.lerp(vec, step)
     }
-    // if(home) {
-    //   vec.set(0, -11.5, -1)
-    //   group.current.position.lerp(vec, step)
-    // }
+    if(page === 0) {
+      vec.set(0, -1.25, -1)
+      group.current.position.lerp(vec, step)
+    }
+    if(page > 4) {
+      vec.set(0, -1.25, -0.5)
+      group.current.position.lerp(vec, step / 3)
+    }
   });
 
 
@@ -45,6 +49,7 @@ export default function META({ ...props }) {
       rotation={[Math.PI / 6, -Math.PI / 3, 0]}
       // scale={viewport.width / 6}
       position={[0, -1.25, -1]}
+      // position={[0, -1.25, -1]}
       onClick={() => console.log(viewport)}
     >
       <group position={[0.27, 0.42, -1.37]} scale={2.08}>
