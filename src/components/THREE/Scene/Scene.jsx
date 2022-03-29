@@ -1,4 +1,4 @@
-import { Float, OrbitControls, SpotLight, Text } from "@react-three/drei";
+import { OrbitControls, Plane } from "@react-three/drei";
 
 
 import Desk from "../Models/Desk";
@@ -12,12 +12,20 @@ function Scene() {
     <>
       {/* <directionalLight intensity={0.35}/> */}
       <OrbitControls makeDefault/>
-      <pointLight position={[1, 0, -3]}/>
+      {/* <gridHelper /> */}
+      <axesHelper />
       {/* <SpotLight position={[0, 5, 0]} color='red' angle={3} />
       <SpotLight position={[3, 4, 0]} color='blue' angle={3} /> */}
-      <Text position={[0, 2, 0]}>Meta</Text>
+      
       <META />
       <Desk />
+      <Plane
+        args={[10, 100, 10, 100]}
+        position={[0, -0.365, 0]} 
+        rotation={[-Math.PI / 2, 0, 0]}
+      >
+        <meshBasicMaterial color='purple' wireframe />
+      </Plane>
     </>
   );
 };

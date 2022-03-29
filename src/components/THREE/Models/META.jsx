@@ -45,24 +45,39 @@ export default function META({ ...props }) {
       islandPosition.lerp(vec, step / 3)
     }
     if(page === 0) {
-      vec.set(0, -1.5, 0)
+      vec.set(0, -1, 0)
       islandPosition.lerp(vec, step)
     }
   });
 
 
   return (
+    <group ref={group} >
+      <pointLight position={[0, 1, -2]}/>
+      {page === 0 ? 
+      <Text 
+        position={[0, 3.5, 0]} 
+        color='purple'
+        // outlineWidth='1%'
+        // outlineColor='white'
+        // outlineOpacity={0.75}
+        // outlineBlur={0.01}
+        // outlineOffsetX={0.025}
+        // outlineOffsetY={0.025}
+        font='/Exo-VariableFont_wght.ttf'
+        fontSize={0.175}
+      >
+        A Massive Online Coordination Game</Text> : null}
+
     <group 
-      ref={group} 
       {...props} 
       dispose={null}
       rotation={[0, -Math.PI / 3, 0]}
       // scale={viewport.width / 6}
-      position={[0, -1.5, 0]}
+      // position={[0, -1, 0]}
       // position={[0, -1.25, -1]}
       onClick={() => console.log(viewport)}
     >
-      
       <group position={[0.27, 0.42, -1.37]} scale={2.08}>
         <group rotation={[0.42, 0.05, 0.23]}>
           <group position={[0, 0.17, 0]} rotation={[0.02, 0, 0.01]}>
@@ -181,6 +196,7 @@ export default function META({ ...props }) {
       >
         <meshPhysicalMaterial color='gray' />
       </mesh>
+    </group>
     </group>
   )
 }
