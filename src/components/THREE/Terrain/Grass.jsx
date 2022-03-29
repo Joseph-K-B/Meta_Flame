@@ -3,25 +3,32 @@ import * as THREE from 'three';
 import { Geometry } from "three/examples/jsm/deprecated/Geometry"
 
 import { useFrame, useLoader } from '@react-three/fiber';
-import SimplexNoise from 'simplex-noise';
 
-import './GrassMaterial';
 import bladeDiffuse from '../../../assets/textures/blade_diffuse.jpeg'
 import bladeAlpha from '../../../assets/textures/blade_alpha.jpeg';
 import { getAttributeData, getYPosition } from '../../../utils/getAttributeData';
 
+import './GrassMaterial';
 
 
 
 function Grass({options = {bw: 0.12, bH: 1, joints: 5}, width = 200, instances = 30000}) {
   const { bW, bH, joints } = options;
   const materialRef = useRef();
+  const mesh = useRef();
 
   const [texture, alphaMap] = useLoader(THREE.TextureLoader, [bladeDiffuse, bladeAlpha])
 
 
   const attributeData = useMemo(() => getAttributeData(instances, width), [instances, width]);
-  const baseGeom = useMemo(() => new THREE.PlaneBufferGeometry(bW, bH, 1, joints).translate(0, bH / 2, 0), [options]);
+
+
+  const baseGeom = useMemo(() => 
+    new THREE.PlaneBufferGeometry(bW, bH, 1, joints)
+    .translate(0, bH / 2, 0), [options]);
+
+
+
   const groundGeo = useMemo(() => {
     const geo = new Geometry().fromBufferGeometry(new THREE.PlaneGeometry(width, width, 32, 32))
     geo.verticesNeedUpdate = true;
@@ -35,27 +42,52 @@ function Grass({options = {bw: 0.12, bH: 1, joints: 5}, width = 200, instances =
   }, [width]);
 
   useFrame((state) => (materialRef.current.uniforms.time.value = state.clock.elapsedTime / 4))
+
   return(
     <>
-      <mesh>
+      <mesh
+        ref={mesh}
+        onClick={console.log(mesh)}
+        castShadow 
+        receiveShadow
+      >
         <instancedBufferGeometry
+          castShadow
+          receiveShadow
           index={baseGeom.index}
           attributes-position={baseGeom.attributes.posiition}
           attributes-uv={baseGeom.attributes.uv}
         >
-          <instancedBufferAttribute attachObject={['attributes', 'offset']} args={[new Float32Array(attributeData.offsets), 3]} />
-          <instancedBufferAttribute attachObject={['attributes', 'orientation']} args={[new Float32Array(attributeData.orientations), 4]} />
-          <instancedBufferAttribute attachObject={['attributes', 'stretch']} args={[new Float32Array(attributeData.stretches), 1]} />
-          <instancedBufferAttribute attachObject={['attributes', 'offset']} args={[new Float32Array(attributeData.offsets), 3]} />
-          <instancedBufferAttribute attachObject={['attributes', 'halfRootAngleSin']} args={[new Float32Array(attributeData.halfRootAngleSin), 1]} />
-          <instancedBufferAttribute attachObject={['attributes', 'halfRootAngleCos']} args={[new Float32Array(attributeData.halfRootAngleCos), 1]} />
-          <instancedBufferAttribute attachObject={['attributes', 'color']} args={[new Float32Array(attributeData.color), 3]} />
+          <instancedBufferAttribute 
+            attachObject={['attributes', 'offset']} 
+            args={[new Float32Array(attributeData.offsets), 3]} 
+          />
+          <instancedBufferAttribute 
+            attachObject={['attributes', 'orientation']} 
+            args={[new Float32Array(attributeData.orientations), 4]} 
+          />
+          <instancedBufferAttribute 
+            attachObject={['attributes', 'stretch']} 
+            args={[new Float32Array(attributeData.stretches), 1]} 
+          />
+          <instancedBufferAttribute 
+            attachObject={['attributes', 'halfRootAngleSin']} 
+            args={[new Float32Array(attributeData.halfRootAngleSin), 1]} 
+          />
+          <instancedBufferAttribute 
+            attachObject={['attributes', 'halfRootAngleCos']} 
+            args={[new Float32Array(attributeData.halfRootAngleCos), 1]} 
+          />
+          <instancedBufferAttribute 
+            attachObject={['attributes', 'color']} 
+            args={[new Float32Array(attributeData.colors), 3]} 
+          />
         </instancedBufferGeometry>
         <grassMaterial ref={materialRef} map={texture} alphaMap={alphaMap}/>
-        <mesh geometry={groundGeo}>
+      </mesh>
+        <mesh receiveShadow geometry={groundGeo}>
           <meshStandardMaterial color='#000f00' />
         </mesh>
-      </mesh>
     </>
   )
 };

@@ -1,8 +1,8 @@
 import * as THREE from 'three';
+import SimplexNoise from 'simplex-noise';
+
 
 const simplex = new SimplexNoise(Math.random);
-
-import SimplexNoise from 'simplex-noise';
 
 function getAttributeData(instances, width) {
   const offsets = []

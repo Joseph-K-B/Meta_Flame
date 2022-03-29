@@ -6,7 +6,7 @@ import React, { useRef } from 'react'
 import * as THREE from 'three';
 
 
-import { Float, useGLTF } from '@react-three/drei'
+import { Float, Text, useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber';
 
 
@@ -62,6 +62,7 @@ export default function META({ ...props }) {
       // position={[0, -1.25, -1]}
       onClick={() => console.log(viewport)}
     >
+      
       <group position={[0.27, 0.42, -1.37]} scale={2.08}>
         <group rotation={[0.42, 0.05, 0.23]}>
           <group position={[0, 0.17, 0]} rotation={[0.02, 0, 0.01]}>
@@ -99,7 +100,7 @@ export default function META({ ...props }) {
           material={nodes.tentacle3.material} 
           scale={0.48} 
         >
-          <meshBasicMaterial color='orange' />
+          <meshPhysicalMaterial color='orange' />
         </mesh>
       </group>
         <mesh 
@@ -109,7 +110,7 @@ export default function META({ ...props }) {
           rotation={[2.58, -0.09, 3.09]} 
           scale={[-0.03, -0.02, 0.12]} 
         >
-          <meshBasicMaterial color='gray' />
+          <meshPhysicalMaterial color='gray' />
         </mesh>
         <mesh 
           geometry={nodes.small_sphere.geometry} 
@@ -118,7 +119,7 @@ export default function META({ ...props }) {
           rotation={[Math.PI, -0.1, Math.PI]} 
           scale={0.07} 
         >
-          <meshBasicMaterial color='gray' />
+          <meshPhysicalMaterial color='gray' />
         </mesh>
         <mesh 
           geometry={nodes.middle_sphere.geometry} 
@@ -143,14 +144,24 @@ export default function META({ ...props }) {
         rotation={[2.64, -0.28, 2.99]} 
         scale={[-0.21, -0.48, -0.21]} 
       >
-        <meshBasicMaterial color='purple' />
+        <meshPhysicalMaterial 
+          color='purple'
+          transmission={0.5}
+          ior={1.5}
+          thickness={0.01}
+          specularIntensity={1}
+          exposure={1}
+          opacity={1}
+          metalness={0} 
+          roughness={0} 
+        />
       </mesh>
       <mesh 
         geometry={nodes.island.geometry} 
         // material={nodes.island.material} 
         position={[-0.85, 0.73, -0.86]} 
       >
-        <meshBasicMaterial color='#43464b' />
+        <meshPhysicalMaterial color='#43464b' />
       </mesh>
       <mesh 
         geometry={nodes.water.geometry} 
@@ -158,14 +169,17 @@ export default function META({ ...props }) {
         position={[0.55, -1.91, 2]} 
         scale={1.1} 
       >
-        <meshBasicMaterial color='blue' />
+        <meshPhysicalMaterial 
+        color='blue'
+        roughness={1}  
+        />
       </mesh>
       <mesh 
         geometry={nodes.ground.geometry} 
         // material={nodes.ground.material} 
         position={[-0.85, 0.73, -0.86]} 
       >
-        <meshBasicMaterial color='green' />
+        <meshPhysicalMaterial color='gray' />
       </mesh>
     </group>
   )
