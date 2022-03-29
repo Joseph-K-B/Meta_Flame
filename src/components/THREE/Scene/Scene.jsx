@@ -19,13 +19,6 @@ function Scene() {
       
       <META />
       <Desk />
-      <Plane
-        args={[10, 100, 10, 100]}
-        position={[0, -0.365, 0]} 
-        rotation={[-Math.PI / 2, 0, 0]}
-      >
-        <meshBasicMaterial color='purple' wireframe />
-      </Plane>
     </>
   );
 };

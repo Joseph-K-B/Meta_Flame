@@ -35,11 +35,11 @@ export default function META({ ...props }) {
       vec.set(0, 10, -1);
       islandPosition.lerp(vec, step)
     }
-    if(!forward && page === 4) {
+    if(!forward && page === 6) {
       vec.set(0, 10, -1);
       islandPosition.lerp(vec, step);
     }
-    if(page === 5) {
+    if(page === 7) {
       prev.set(0, 10, -1);
       vec.set(0, -1.25, -0.5)
       islandPosition.lerp(vec, step / 3)
