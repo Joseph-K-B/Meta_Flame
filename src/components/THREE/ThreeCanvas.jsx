@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Html, OrbitControls, Stats } from "@react-three/drei";
 
-import Desk from "./Models/Desk";
 import css from '../../app.css'
+import Scene from "./Scene/Scene";
 
 
 function ThreeCanvas() {
@@ -14,7 +14,7 @@ function ThreeCanvas() {
         <OrbitControls />
         <Stats />
         <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
-          <Desk />
+          <Scene />
         </Suspense>
       </Canvas>
     </>
