@@ -43,12 +43,12 @@ function Drawer(){
           </button>
         </div>
         <div className={css.panel}>
-          <button onClick={handlePage}>
+          {/* <button onClick={handlePage}>
             +++
           </button>
           <button onClick={handlePrevPage}>
             ---
-          </button>
+          </button> */}
 
         </div>
       </a.section>
