@@ -47,13 +47,13 @@ function Scene() {
     }
     if(page === 4) {
       vec.set(0, 1.5, -4)
-      vecTwo.set(0, 0, 0);
+      vecTwo.set(0, 1.15, 0);
       camera.position.lerp(vec, step)
       grid.current.position.lerp(vecTwo, step / 2)
     }
     if(page === 5) {
       vec.set(0, 1.5, -5);
-      vecTwo.set(0, 0, -100);
+      vecTwo.set(0, 1.15, -100);
       // camera.position.lerp(vec, step);
       // deskPosition.lerp(vecTwo, step / 2)
       grid.current.position.lerp(vecTwo, step * 0.05)
@@ -85,7 +85,7 @@ function Scene() {
         <Plane
           ref={grid}
           args={[10, 100, 10, 100]}
-          position={[0, 0, 100]} 
+          position={[0, 1.15, 100]} 
           rotation={[-Math.PI / 2, 0, 0]}
           visible={page > 3 ? true : false}
         >
