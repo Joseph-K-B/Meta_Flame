@@ -6,9 +6,11 @@ import { useRef } from 'react'
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber';
+import { useStore } from '../../../hooks/useStand';
 
 
 export default function DeskTwo({ ...props }) {
+  const page = useStore((state) => state.page);
 
   const group = useRef();
   const { nodes, materials } = useGLTF('/desk_2.glb')
@@ -48,7 +50,7 @@ export default function DeskTwo({ ...props }) {
         position={[6.46, 4.38, 0.23]} 
         rotation={[-Math.PI, 0.71, -Math.PI]} scale={0.9} 
       >
-        <meshBasicMaterial map={texture}/>
+        <meshBasicMaterial map={texture} visible={page < 5 ? true : false}/>
       </mesh>
     </group>
   )

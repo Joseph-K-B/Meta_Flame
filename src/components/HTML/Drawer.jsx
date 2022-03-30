@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { animated as a, useSpring } from "react-spring";
 
-import css from '../../app.css';
 import { useStore } from "../../hooks/useStand";
+import css from '../../app.css';
 
 function Drawer(){
-  const page = useStore((state) => state.page);
-
-
-  
+  const page = useStore((state) => state.page);  
   const setPage = useStore((state) => state.setPage);
   const setForward = useStore((state) => state.setForward);
 

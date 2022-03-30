@@ -73,3 +73,26 @@
 .prompt {
   background-color: navy;
 }
+
+.Pagination {
+  position: absolute;
+  bottom: 0;
+  min-width: 100vw;
+}
+
+.Pagination button {
+  background: none;
+  border: none;
+}
+
+.prev {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.next {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
