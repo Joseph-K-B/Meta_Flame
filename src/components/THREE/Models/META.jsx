@@ -115,7 +115,7 @@ export default function META({ ...props }) {
           material={nodes.tentacle3.material} 
           scale={0.48} 
         >
-          <meshPhysicalMaterial color='orange' />
+          <meshBasicMaterial color='orange' />
         </mesh>
       </group>
         <mesh 
@@ -125,7 +125,7 @@ export default function META({ ...props }) {
           rotation={[2.58, -0.09, 3.09]} 
           scale={[-0.03, -0.02, 0.12]} 
         >
-          <meshPhysicalMaterial color='gray' />
+          <meshBasicMaterial color='gray' />
         </mesh>
         <mesh 
           geometry={nodes.small_sphere.geometry} 
@@ -134,7 +134,7 @@ export default function META({ ...props }) {
           rotation={[Math.PI, -0.1, Math.PI]} 
           scale={0.07} 
         >
-          <meshPhysicalMaterial color='gray' />
+          <meshBasicMaterial color='gray' />
         </mesh>
         <mesh 
           geometry={nodes.middle_sphere.geometry} 
@@ -159,16 +159,16 @@ export default function META({ ...props }) {
         rotation={[2.64, -0.28, 2.99]} 
         scale={[-0.21, -0.48, -0.21]} 
       >
-        <meshPhysicalMaterial 
+        <meshBasicMaterial 
           color='purple'
-          transmission={0.5}
-          ior={1.5}
-          thickness={0.01}
-          specularIntensity={1}
-          exposure={1}
-          opacity={1}
-          metalness={0} 
-          roughness={0} 
+          // transmission={0.5}
+          // ior={1.5}
+          // thickness={0.01}
+          // specularIntensity={1}
+          // exposure={1}
+          // opacity={1}
+          // metalness={0} 
+          // roughness={0} 
         />
       </mesh>
       <mesh 
@@ -176,7 +176,7 @@ export default function META({ ...props }) {
         // material={nodes.island.material} 
         position={[-0.85, 0.73, -0.86]} 
       >
-        <meshPhysicalMaterial color='#43464b' />
+        <meshBasicMaterial color='#43464b' />
       </mesh>
       <mesh 
         geometry={nodes.water.geometry} 
@@ -184,7 +184,7 @@ export default function META({ ...props }) {
         position={[0.55, -1.91, 2]} 
         scale={1.1} 
       >
-        <meshPhysicalMaterial 
+        <meshBasicMaterial 
         color='blue'
         roughness={1}  
         />
@@ -194,7 +194,7 @@ export default function META({ ...props }) {
         // material={nodes.ground.material} 
         position={[-0.85, 0.73, -0.86]} 
       >
-        <meshPhysicalMaterial color='gray' />
+        <meshBasicMaterial color='gray' />
       </mesh>
     </group>
     </group>

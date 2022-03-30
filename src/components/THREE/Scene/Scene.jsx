@@ -91,9 +91,9 @@ function Scene() {
         >
           <meshBasicMaterial color='purple' wireframe />
         </Plane>
-        <Plane ref ={target} position={[0, 1.5, 10]}>
+        {/* <Plane ref ={target} position={[0, 1.5, 10]}>
           <meshBasicMaterial color='green' wireframe />
-        </Plane>
+        </Plane> */}
       </group>
       {/* <Desk /> */}
     </>
