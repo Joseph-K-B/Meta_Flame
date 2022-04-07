@@ -19,22 +19,23 @@ export default function META({ ...props }) {
   const group = useRef()
 
   const {viewport}= useThree();
-  const { nodes, materials } = useGLTF('/island/META.glb');
-
-  //prev positions
-
+  const { nodes } = useGLTF('/island/META.glb');
 
   const vec = new THREE.Vector3();
   const prev = new THREE.Vector3();
 
   useFrame(() => {
+    // used in lerps to ease interpolation
     const step = 0.05
+    //It gets old writing refs over and over
     const islandPosition = group.current.position
+    //check direction and state of view
     if(forward && page === 1) {
       prev.set(0, -1.25, -1);
       vec.set(0, 10, -1);
       islandPosition.lerp(vec, step)
     }
+    //handles backward transition
     if(!forward && page === 6) {
       vec.set(0, 10, -1);
       islandPosition.lerp(vec, step);
@@ -52,30 +53,29 @@ export default function META({ ...props }) {
 
 
   return (
+    /*
+      Majority here is the messy geometries of the imported model, 
+      cleans up with proper optimization.
+      The text is conditional for the initial view.
+      Point light is unnecessary w/ basic materials or baked textures
+      I was experimenting w/ reproducing materials in three(that's expensive tech debt though)
+    */
     <group ref={group} >
       <pointLight position={[0, 1, -2]}/>
       {page === 0 ? 
       <Text 
         position={[0, 3.5, 0]} 
         color='purple'
-        // outlineWidth='1%'
-        // outlineColor='white'
-        // outlineOpacity={0.75}
-        // outlineBlur={0.01}
-        // outlineOffsetX={0.025}
-        // outlineOffsetY={0.025}
         font='/Exo-VariableFont_wght.ttf'
         fontSize={0.175}
       >
-        A Massive Online Coordination Game</Text> : null}
+        A Massive Online Coordination Game
+      </Text> : null}
 
     <group 
       {...props} 
       dispose={null}
       rotation={[0, -Math.PI / 3, 0]}
-      // scale={viewport.width / 6}
-      // position={[0, -1, 0]}
-      // position={[0, -1.25, -1]}
       onClick={() => console.log(viewport)}
     >
       <group position={[0.27, 0.42, -1.37]} scale={2.08}>
@@ -161,14 +161,6 @@ export default function META({ ...props }) {
       >
         <meshBasicMaterial 
           color='purple'
-          // transmission={0.5}
-          // ior={1.5}
-          // thickness={0.01}
-          // specularIntensity={1}
-          // exposure={1}
-          // opacity={1}
-          // metalness={0} 
-          // roughness={0} 
         />
       </mesh>
       <mesh 

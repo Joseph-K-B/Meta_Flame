@@ -1,30 +1,42 @@
+//Dep
 import { useRef } from 'react';
 import * as THREE from 'three';
 
+//Dev Dep
 import { OrbitControls, Plane } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
-
+//Local
 import { useStore } from "../../../hooks/useStand";
-import Desk from "../Models/Desk";
 import DeskTwo from "../Models/DeskTwo";
 import META from "../Models/META";
 
 
 function Scene() {
+  //State
   const page = useStore((state) => state.page);
   const forward = useStore((state) => state.forward);
 
+  //Refs
   const group = useRef();
   const grid = useRef();
-  const target = useRef();
 
+  //Imported objects
   const { camera } = useThree();
 
+  //Vectors and Quaternions
   const vec = new THREE.Vector3();
   const vecTwo = new THREE.Vector3();
 
+
+  //Tick
   useFrame((state, delta) => {
+    /*
+      See META file in Models folder for more info
+      A lot of the position states should be moved to store
+      each 'page' is merely just scene state
+      (camera, object, and environment transitions)
+    */
     const deskPosition = group.current.position;
     const step = 0.05
     if(page === 0) {
@@ -75,7 +87,6 @@ function Scene() {
 
   return(
     <>
-      {/* <directionalLight intensity={0.35}/> */}
       <OrbitControls makeDefault/>
       <group>
         <META />
@@ -91,11 +102,7 @@ function Scene() {
         >
           <meshBasicMaterial color='purple' wireframe />
         </Plane>
-        {/* <Plane ref ={target} position={[0, 1.5, 10]}>
-          <meshBasicMaterial color='green' wireframe />
-        </Plane> */}
       </group>
-      {/* <Desk /> */}
     </>
   );
 };

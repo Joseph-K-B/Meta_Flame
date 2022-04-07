@@ -1,9 +1,13 @@
+//Dep
 import { Suspense } from "react";
+
+//Dev Dep
 import { Canvas } from "@react-three/fiber";
 import { Html, OrbitControls, Stats } from "@react-three/drei";
 
-import css from '../../app.css'
+//Local
 import Scene from "./Scene/Scene";
+import css from '../../app.css'
 
 
 function ThreeCanvas() {
